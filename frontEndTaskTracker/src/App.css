@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#root {
+  width: 100%;
+  min-height: 100%;
+
+}
+/* src/index.css */
+
+body {
+  background-color: white;
+  color: #1f2937; /* Optional: dark gray for text */
+  margin: 0;
+  font-family: system-ui, sans-serif;
+}
+

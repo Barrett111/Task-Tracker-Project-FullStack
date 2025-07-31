@@ -1,0 +1,10 @@
+# Ignore target folders
+**/target/
+**/node_modules/
+**/build/
+**/.DS_Store
+.env
+docker-compose.override.yml
+pgdata/
+*.iml
+.idea/

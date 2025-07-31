@@ -1,0 +1,43 @@
+services:
+  # 🌐 React Frontend
+  frontend:
+    build:
+      context: ./frontEndTaskTracker
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"  # use 5173:5173 only for dev
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    depends_on:
+      - backend
+
+  # 🔙 Spring Boot Backend
+  backend:
+    build:
+      context: ./TaskTracker
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/tasktracker
+      SPRING_DATASOURCE_USERNAME: rushikesh118
+      SPRING_DATASOURCE_PASSWORD: root123
+
+  # 🐘 PostgreSQL Database
+  db:
+    image: postgres:15
+    container_name: postgres
+    ports:
+      - "5433:5432"  # Changed host port to 5433 to avoid conflict
+    restart: always
+    environment:
+      POSTGRES_USER: rushikesh118
+      POSTGRES_PASSWORD: root123
+      POSTGRES_DB: tasktracker
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
